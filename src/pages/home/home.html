@@ -1,14 +1,100 @@
-<ion-header>
+<!-- <ion-header>
   <ion-navbar>
     <ion-title>
       Ionic Blank
     </ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content padding scroll="false">
+  <ion-row>
+    <ion-col col-3>
+      <img src="assets/imgs/icon_small.png">
+    </ion-col>
+    <ion-col>
+      <h4><strong>SEMAKAN KETULENAN</strong></h4>
+      <h3 class="h3">STAMPS</h3>
+      <strong><span text-wrap class="text-block">LEMBAGA HASIL DALAM NEGERI MALAYSIA</span></strong>
+    </ion-col>
+  </ion-row>
+  
+  <!-- <div><h1>{{QRText}}</h1></div> -->
+
+  <ion-card *ngIf="showPenafian">
+      <ion-card-content>
+       <div align="justify"><ion-icon name="flag"></ion-icon> 
+        PENAFIAN: Lembaga Hasil Dalam Negeri Malaysia tidak bertanggungjawab terhadap sebarang kehilangan atau kerosakan yang dialami kerana menggunakan maklumat dalam aplikasi ini  
+       </div>
+       <div padding style="border-bottom: solid 1px lightgrey"></div>
+       <div padding></div>
+       <button color="slate" block ion-button (click)="scanQRCode()">SEMAKAN KOD</button>
+      </ion-card-content>
+  </ion-card>
+
+  <ion-card class="result" *ngIf="!showPenafian">
+      <ion-card-header text-wrap class="card-header" color="light">HASIL CARIAN PENGESAHAN KETULENAN NO ADJUDIKASI {{ADJ_NO}}</ion-card-header>
+      <ion-card-content class="card-content-result">
+        <ion-list>
+          <ion-item text-wrap>
+            <strong>Jenis Sijil / Certificate Type</strong>
+            <div [innerHTML]="CERT_TYPE"></div>
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>No Adjudikasi</strong><br>
+            {{ADJ_NO}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Tarikh Suratcara / Date of Instrument</strong><br>
+            {{DATE_INSTRUMENT}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Butiran Suratcara / Instrument Description</strong><br>
+            {{DESC_INSTRUMENT}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Balasan / Consideration</strong><br>
+            {{CONSIDERATION}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Pihak Pertama / First Party</strong><br>
+            {{FIRST_PARTY}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Pihak Kedua / Second Party</strong>
+            <div [innerHTML]="SECOND_PARTY"></div>
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>No. Sijil/Resit / Certificate/Receipt No.</strong><br>
+            {{CERT_NO}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Tarikh Penyeteman / Date of Stamping</strong><br>
+            {{DATE_STAMP}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Duti Setem Dikenakan / Amount Stamp of Duty</strong><br>
+            {{STAMP_AMOUNT}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Penalti / Penalty</strong><br>
+            {{PENALTY}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Jumlah Dibayar / Total Amount Paid</strong><br>
+            {{TOTAL_AMOUNT}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Indorsement / Indorsement</strong><br>
+              {{INDORSEMENT}}
+          </ion-item>
+        </ion-list>
+        <ion-row>
+          <ion-col offset-8>
+              <img src="assets/imgs/cop.jpg" width="10px">              
+          </ion-col>
+        </ion-row>
+        <button color="slate" block ion-button (click)="scanQRCode()">SEMAKAN SEMULA</button>
+      </ion-card-content>
+  </ion-card>
+
 </ion-content>
