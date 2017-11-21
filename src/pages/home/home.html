@@ -7,7 +7,7 @@
 </ion-header> -->
 
 <ion-content padding scroll="false">
-  <ion-row>
+  <!-- <ion-row>
     <ion-col col-3>
       <img src="assets/imgs/icon_small.png">
     </ion-col>
@@ -16,10 +16,11 @@
       <h3 class="h3">STAMPS</h3>
       <strong><span text-wrap class="text-block">LEMBAGA HASIL DALAM NEGERI MALAYSIA</span></strong>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
+  <div class="logo-header" padding><img src="assets/imgs/logo-header.jpg"></div>
   
   <!-- <div><h1>{{QRText}}</h1></div> -->
-
+  <!-- <div><h2>{{STATUS}}</h2></div> -->
   <ion-card *ngIf="showPenafian">
       <ion-card-content>
        <div align="justify"><ion-icon name="flag"></ion-icon> 
@@ -30,62 +31,69 @@
        <button color="slate" block ion-button (click)="scanQRCode()">SEMAKAN KOD</button>
       </ion-card-content>
   </ion-card>
-
-  <ion-card class="result" *ngIf="!showPenafian">
+  <!-- *ngIf="!showPenafian" -->
+  <ion-card class="result" *ngIf="showResult">
+      <!-- <ion-card class="result"> -->
       <ion-card-header text-wrap class="card-header" color="light">HASIL CARIAN PENGESAHAN KETULENAN NO ADJUDIKASI {{ADJ_NO}}</ion-card-header>
       <ion-card-content class="card-content-result">
+        
         <ion-list>
+          <div style="padding-top: 5px"></div>
           <ion-item text-wrap>
-            <strong>Jenis Sijil / Certificate Type</strong>
+            <strong>Jenis Sijil / <em>Certificate Type</em> :</strong>
             <div [innerHTML]="CERT_TYPE"></div>
           </ion-item>
           <ion-item text-wrap>
-            <strong>No Adjudikasi</strong><br>
-            {{ADJ_NO}}
+            <strong>No Adjudikasi / <em>Adjudication No</em> :</strong><br>
+            {{ADJ_NO}} {{TXTSALINAN || ''}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Tarikh Suratcara / Date of Instrument</strong><br>
+            <strong>Jenis Suratcara / <em>Instrument Type</em> :</strong><br>
+            {{INSTRUMENT_TYPE}}
+          </ion-item>
+          <ion-item text-wrap>
+            <strong>Tarikh Suratcara / <em>Date of Instrument</em> :</strong><br>
             {{DATE_INSTRUMENT}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Butiran Suratcara / Instrument Description</strong><br>
-            {{DESC_INSTRUMENT}}
+            <strong>Butiran Suratcara / <em>Description</em> :</strong><br>
+            <div [innerHTML]="DESC_INSTRUMENT"></div>
           </ion-item>
           <ion-item text-wrap>
-            <strong>Balasan / Consideration</strong><br>
+            <strong>Balasan / <em>Consideration</em> :</strong><br>
             {{CONSIDERATION}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Pihak Pertama / First Party</strong><br>
-            {{FIRST_PARTY}}
+            <strong>Pihak Pertama / <em>First Party</em> :</strong><br>
+            <div [innerHTML]="FIRST_PARTY"></div>
           </ion-item>
           <ion-item text-wrap>
-            <strong>Pihak Kedua / Second Party</strong>
+            <strong>Pihak Kedua / <em>Second Party</em> :</strong>
             <div [innerHTML]="SECOND_PARTY"></div>
           </ion-item>
           <ion-item text-wrap>
-            <strong>No. Sijil/Resit / Certificate/Receipt No.</strong><br>
+            <strong>No Sijil/Resit / <em>Certificate/Receipt No</em> :</strong><br>
             {{CERT_NO}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Tarikh Penyeteman / Date of Stamping</strong><br>
+            <strong>Tarikh Penyeteman / <em>Date of Stamping</em> :</strong><br>
             {{DATE_STAMP}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Duti Setem Dikenakan / Amount Stamp of Duty</strong><br>
+            <strong>Duti Setem Dikenakan / <em>Amount Stamp of Duty</em> :</strong><br>
             {{STAMP_AMOUNT}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Penalti / Penalty</strong><br>
+            <strong>Penalti / <em>Penalty</em> :</strong><br>
             {{PENALTY}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Jumlah Dibayar / Total Amount Paid</strong><br>
+            <strong>Jumlah Dibayar / <em>Total Amount Paid</em> :</strong><br>
             {{TOTAL_AMOUNT}}
           </ion-item>
           <ion-item text-wrap>
-            <strong>Indorsement / Indorsement</strong><br>
-              {{INDORSEMENT}}
+            <strong>Indorsemen / <em>Indorsement</em> :</strong><br>
+            {{INDORSEMENT}}
           </ion-item>
         </ion-list>
         <ion-row>
@@ -96,5 +104,17 @@
         <button color="slate" block ion-button (click)="scanQRCode()">SEMAKAN SEMULA</button>
       </ion-card-content>
   </ion-card>
+
+  <ion-card *ngIf="showError">
+      <ion-card-header text-wrap class="card-danger" color="light">HASIL CARIAN PENGESAHAN KETULENAN NO ADJUDIKASI {{ADJ_NO}}</ion-card-header>
+    <ion-card-content>
+      <div align="justify" class="card-error">
+        {{TXTSTATUS||'Semakan Tidak Berjaya'}}
+      </div>
+      <div padding class="border-grey"></div>
+      <div padding></div>
+      <button color="slate" block ion-button (click)="scanQRCode()">SEMAKAN SEMULA</button>
+    </ion-card-content>
+</ion-card>
 
 </ion-content>
